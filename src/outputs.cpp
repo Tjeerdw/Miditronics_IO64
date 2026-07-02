@@ -91,7 +91,7 @@ void setOutput(uint8_t outputNumber, uint8_t outputValue){
     if (outputNumber <= 8)
         ext1.digitalWrite(8-outputNumber,outputValue);
     else if(outputNumber <= 16)
-        ext1.digitalWrite(outputNumber-17,outputValue);
+        ext1.digitalWrite(outputNumber-1,outputValue); //pins 8..15 (port B)
     else if(outputNumber <= 24)
         ext2.digitalWrite(8-(outputNumber-16),outputValue);
     else if(outputNumber <= 32)
