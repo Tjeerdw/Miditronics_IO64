@@ -9,7 +9,6 @@
 #include <MIDI.h>
 #include <ArduinoNvs.h>
 #include <ezButton.h>
- //test
 //config midi instance on serial 2
 #ifdef SERIALMIDI
   MIDI_CREATE_INSTANCE(HardwareSerial, Serial, MIDI);
@@ -27,11 +26,7 @@ moduletypes moduletype = Noten;
 bool isOutputModule = false;
 bool MenuActive = false;
 bool MenuEditActive = false;
-bool menuButtonState = true;
-bool menuButtonlastState = true;
-unsigned long lastDebounceTime = 0;
 unsigned long lastMenuTime = 0;
-unsigned long debounceDelay = 50; 
 unsigned long menuTimout = 10000;
 unsigned long screenUpdatePeriod = 1000; //time between screen updates
 unsigned long screenUpdatetimout = 3000; //time note or register is on screen
@@ -136,8 +131,8 @@ void handleNoteOn(byte incomingChannel, byte pitch, byte velocity){
 #ifdef SERIALDEBUG
   Serial.printf("NoteOn: ch:%d pitch:%d Velocity:%d\n", incomingChannel, pitch, velocity);
 #endif
-  if (moduletype==Noten) {  
-    velocity = 127; //ter ere van Hendrikus
+  if (moduletype==Noten) {
+    //velocity wordt genegeerd, altijd vol aan - ter ere van Hendrikus
     if ((pitch>=startNoot) && (pitch<eindNoot)) {
       int outputpitch = (pitch-(startNoot-1)); //converteert noot naar het juiste outputnummer        
       setOutput(outputpitch,HIGH); //schakel noot in
@@ -158,7 +153,6 @@ void handleNoteOff(byte incomingChannel, byte pitch, byte velocity){
   Serial.printf("NoteOff: ch:%d pitch:%d Velocity:%d\n", incomingChannel, pitch, velocity);
 #endif
   if (moduletype==Noten) {
-    velocity = 127; //ter ere van Hendrikus
     //All Notes Off - note 127 is panic note (CC 123 is filtered by merger)
     if (pitch == 127) {
       for (int i = 1; i <= totaalModuleKanalen; i++) {

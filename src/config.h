@@ -34,13 +34,6 @@
 #define BUT_RIGHT_PIN   39
 #define BUT_LEFT_PIN    34
 
-//Menu
-//Default font: lcd5x7
-//#define LARGE_FONT Verdana12
-#define MAX_DEPTH 2
-#define fontX 5
-#define fontY 10
-
 //Midi-Serial
 #define MIDI_IN_RX_PIN 18
 #define MIDI_IN_TX_PIN 19
