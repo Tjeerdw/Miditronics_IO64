@@ -73,7 +73,7 @@ void extendersInit(uint8_t channelNumbers, uint8_t isThisAnOutputModule){
 
     if(isThisAnOutputModule){ //if it is an output module, set al outputs to 0
         
-        for (int i=1; i<channelNumbers; i++){
+        for (int i=1; i<=channelNumbers; i++){ //outputs are 1-based, so include the last one
             setOutput(i,0);
         }
     }
