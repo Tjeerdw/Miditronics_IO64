@@ -100,7 +100,7 @@ void writeIdleScreen(){
 
 void updateScreen(){
   if (updateForScreen){
-    if (millis()> (lastScreenUpdate+screenUpdatePeriod)){
+    if (millis() - lastScreenUpdate > screenUpdatePeriod){ //subtraction is safe across millis() rollover
       lastScreenUpdate=millis();
       display.setTextSize(3);
       display.setCursor(0,32);
@@ -119,7 +119,7 @@ void updateScreen(){
     }
   }
   if(noteOnScreen){
-    if (millis()> (lastScreenUpdate+screenUpdatetimout)){
+    if (millis() - lastScreenUpdate > screenUpdatetimout){
       display.setTextSize(3);
       display.setCursor(0,32);
       display.print("      ");
