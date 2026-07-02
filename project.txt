@@ -84,6 +84,34 @@ Changes in src/main.cpp:
   - inputModuleCall(): Replaced 4-line manual copy with
     memcpy(previousInputs, actualInputs, sizeof(actualInputs));
 
+2026-07-02 - Correctness batch (step 1 of review.md path forward)
+------------------------------------------------------------------
+Six small commits on the bugfix branch, one per fix. Firmware builds
+cleanly (pio run, SUCCESS).
+
+  - src/outputs.cpp setOutput(): outputs 9-16 changed from outputNumber-17
+    (underflow, worked by accident via lib-internal pin%8) to the intended
+    outputNumber-1. Identical behavior on MCP23017 lib 1.3.0; unblocks a
+    future upgrade to 2.x. (review.md 1.1)
+  - src/outputs.cpp extendersInit(): clear loop i<channelNumbers -> <=,
+    so the last (1-based) output is also cleared. Matters after
+    ESP.restart() because the MCP output latch survives soft reset. (1.4)
+  - src/main.cpp updateScreen(): both time checks rewritten to the
+    rollover-safe millis()-last > period idiom. (1.6)
+  - src/main.cpp: screen timeout clear now 7 spaces, matching the update
+    clear ("Reg 127" is 7 chars). (1.11)
+  - Dead code removed: menuButtonState/menuButtonlastState/
+    lastDebounceTime/debounceDelay (pre-ezButton leftovers), the two
+    velocity=127 dead stores (Hendrikus tribute kept as comment), stray
+    //test, and MAX_DEPTH/fontX/fontY/LARGE_FONT in config.h.
+  - Comment fixes: "listen Omni" corrected (library filters on the
+    configured channel); documented that MIDI.begin() re-inits UART2 on
+    default pins 16/17 (THRU pins) and that the second Serial2.begin(18,19)
+    is therefore load-bearing.
+
+Not yet done (next steps per review.md): NVS settings validation (1.2)
+and keeping MIDI.read() alive while the menu is open (1.3).
+
 2026-07-02 - Comprehensive code review
 ----------------------------------------
 Full review of src/, get_git_hash.py and platformio.ini written to review.md.
