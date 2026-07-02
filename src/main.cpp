@@ -466,10 +466,13 @@ void setup() {
 
   //Midi init, library filters on the configured channel (handlers only see matching messages)
   pinMode(MIDI_IN_DE_PIN, OUTPUT);
+  pinMode(MIDI_TH_DE_PIN, OUTPUT);
+
   if (isOutputModule){
-    digitalWrite(MIDI_IN_DE_PIN, LOW);} //Receiver enable 
+    digitalWrite(MIDI_IN_DE_PIN, LOW);} //Receiver enable in/output port
   else{
-    digitalWrite(MIDI_IN_DE_PIN, HIGH);} //transmitter enable
+    digitalWrite(MIDI_IN_DE_PIN, HIGH); //transmitter enable in/output port
+    digitalWrite(MIDI_TH_DE_PIN, LOW);} //Receiver enable TH port
   
   Serial2.begin(31250, SERIAL_8N1, MIDI_IN_RX_PIN, MIDI_IN_TX_PIN);
   Serial2.flush();
