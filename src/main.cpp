@@ -464,17 +464,20 @@ void setup() {
   display.display();
   #endif
 
-  //Midi init, listen Omni
+  //Midi init, library filters on the configured channel (handlers only see matching messages)
   pinMode(MIDI_IN_DE_PIN, OUTPUT);
   if (isOutputModule){
     digitalWrite(MIDI_IN_DE_PIN, LOW);} //Receiver enable 
   else{
     digitalWrite(MIDI_IN_DE_PIN, HIGH);} //transmitter enable
   
-  Serial2.begin(31250, SERIAL_8N1, MIDI_IN_RX_PIN, MIDI_IN_TX_PIN); //serial voor en na midi.begin zetten lijkt betrouwbaar
+  Serial2.begin(31250, SERIAL_8N1, MIDI_IN_RX_PIN, MIDI_IN_TX_PIN);
   Serial2.flush();
   MIDI.begin(MidiChannel); //luister/zend op opgegeven kanaal
-  Serial2.begin(31250, SERIAL_8N1, MIDI_IN_RX_PIN, MIDI_IN_TX_PIN); //volgens mij wordt dit al gedaan in de midi.begin
+  //LET OP: MIDI.begin() roept intern Serial2.begin(31250) aan ZONDER pin-argumenten,
+  //waardoor UART2 terugvalt op de default pins 16/17 (de THRU-poort pins).
+  //Deze tweede begin() zet de UART terug op de MIDI-IN pins 18/19 - niet verwijderen!
+  Serial2.begin(31250, SERIAL_8N1, MIDI_IN_RX_PIN, MIDI_IN_TX_PIN);
   Serial2.flush();
 #ifdef SERIALMIDI
   Serial.begin(115200);
