@@ -122,7 +122,7 @@ void updateScreen(){
     if (millis() - lastScreenUpdate > screenUpdatetimout){
       display.setTextSize(3);
       display.setCursor(0,32);
-      display.print("      ");
+      display.print("       "); //7 spaces, same as the clear above ("Reg 127" is 7 chars)
       display.display();
       noteOnScreen = false;
     }
