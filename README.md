@@ -7,5 +7,5 @@ ___  ____     _ _ _                   _
 \_|  |_/_|\__,_|_|\__|_|  \___/|_| |_|_|\___|___/
                                                 
 </pre>
-Miditronics output module<br/>
+Miditronics IO64 module<br/>
 een project van het Orgelbouwers-Gilde van de Adelbertuskerk in Haarlem

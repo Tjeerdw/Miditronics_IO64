@@ -150,3 +150,17 @@ generating no spurious events.
 Changes in src/main.cpp:
   - setup(): Added readInputs() + memcpy(previousInputs, actualInputs)
     after delay(2000), guarded by !isOutputModule.
+
+2026-11-18 - Rename: Miditronics_output -> Miditronics_IO64
+------------------------------------------------------------
+Project renamed to Miditronics_IO64 (GitHub repo, local folder, texts).
+The boot screen still shows the hardware type (output vs input board),
+so the name was added in front of it rather than replacing it.
+
+Changes:
+  - README.md: title "Miditronics output module" -> "Miditronics IO64 module".
+  - platformio.ini: Chromebook copypasta comment path now
+    /Miditronics_IO64/.pio/...
+  - src/main.cpp setup(): OLED boot text "Miditronics Output" /
+    "Miditronics Input" -> "IO64 Output" / "IO64 Input".
+  - git remote origin -> https://github.com/Tjeerdw/Miditronics_IO64.git

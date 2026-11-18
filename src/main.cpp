@@ -431,9 +431,9 @@ void setup() {
   display.setTextColor(WHITE,BLACK);
   display.setCursor(0, 0);
   if (isOutputModule){
-    display.println("Miditronics Output");}
+    display.println("IO64 Output");}
   else{
-    display.println("Miditronics Input");}
+    display.println("IO64 Input");}
   display.display(); 
 
   //USB serial init
