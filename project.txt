@@ -164,3 +164,9 @@ Changes:
   - src/main.cpp setup(): OLED boot text "Miditronics Output" /
     "Miditronics Input" -> "IO64 Output" / "IO64 Input".
   - git remote origin -> https://github.com/Tjeerdw/Miditronics_IO64.git
+
+2026-11-18 - Build fix: ezButton 1.0.4 no longer in PlatformIO registry
+--------------------------------------------------------------------
+Registry now only offers 1.0.6, so 'arduinogetstarted/ezButton @ 1.0.4' failed
+with UnknownPackageError. Now pulled from GitHub tag v1.0.4 (same code, no
+firmware change), like the other lib_deps. Build verified.
