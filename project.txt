@@ -170,3 +170,7 @@ Changes:
 Registry now only offers 1.0.6, so 'arduinogetstarted/ezButton @ 1.0.4' failed
 with UnknownPackageError. Now pulled from GitHub tag v1.0.4 (same code, no
 firmware change), like the other lib_deps. Build verified.
+
+2026-11-20 - Hendrikus-regel terug
+  velocity = 127; //ter ere van Hendrikus  weer in handleNoteOn/handleNoteOff
+  (was verwijderd in 3be8164). Functioneel geen verschil, eerbetoon.

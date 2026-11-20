@@ -132,7 +132,7 @@ void handleNoteOn(byte incomingChannel, byte pitch, byte velocity){
   Serial.printf("NoteOn: ch:%d pitch:%d Velocity:%d\n", incomingChannel, pitch, velocity);
 #endif
   if (moduletype==Noten) {
-    //velocity wordt genegeerd, altijd vol aan - ter ere van Hendrikus
+    velocity = 127; //ter ere van Hendrikus
     if ((pitch>=startNoot) && (pitch<eindNoot)) {
       int outputpitch = (pitch-(startNoot-1)); //converteert noot naar het juiste outputnummer        
       setOutput(outputpitch,HIGH); //schakel noot in
@@ -153,6 +153,7 @@ void handleNoteOff(byte incomingChannel, byte pitch, byte velocity){
   Serial.printf("NoteOff: ch:%d pitch:%d Velocity:%d\n", incomingChannel, pitch, velocity);
 #endif
   if (moduletype==Noten) {
+    velocity = 127; //ter ere van Hendrikus
     //All Notes Off - note 127 is panic note (CC 123 is filtered by merger)
     if (pitch == 127) {
       for (int i = 1; i <= totaalModuleKanalen; i++) {
